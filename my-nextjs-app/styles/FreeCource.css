@@ -1,0 +1,69 @@
+/* Free Courses Specific Styles */
+.free-courses-container {
+  padding: 4rem 0;
+  background-color: #f0f9ff;
+}
+
+.free-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  z-index: 2;
+}
+
+.course-description {
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.course-topics {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.course-topics h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.course-topics ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.course-topics li {
+  color: #64748b;
+  font-size: 0.8rem;
+  padding: 0.25rem 0;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.course-topics li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: bold;
+}
+
+.course-features {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
