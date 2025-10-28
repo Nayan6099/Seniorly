@@ -38,7 +38,7 @@ const Header: React.FC = () => {
             </li>
             <li><a href="#">Home</a></li>
             <li><a href="#">Features</a></li>
-            <li><a href="#">Pricing</a></li>
+            {/* <li><a href="#">Pricing</a></li> */}
           </ul>
           <div className="custom-auth-buttons">
             <a className="custom-login-btn" href="#">Login</a>

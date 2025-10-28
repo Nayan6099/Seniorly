@@ -5,91 +5,91 @@ const FreeCourses = () => {
   const freeCourses = [
     {
       id: 1,
-      title: 'Introduction to HTML & CSS',
-      instructor: 'Sarah Johnson',
+      title: 'Introduction to Seniorly',
+      instructor: 'Mukul Pundir',
       rating: 4.8,
       students: 2540,
-      duration: '8 hours',
+      duration: '1 hour',
       image: '/api/placeholder/300/180',
       level: 'Beginner',
-      description: 'Learn the basics of web development with HTML and CSS',
-      topics: ['HTML Fundamentals', 'CSS Styling', 'Responsive Design', 'Flexbox & Grid'],
+      description: 'Let us know each other better',
+      topics: ['Who are we', 'What we aim', 'What you get', 'FAQ'],
       certificate: true
     },
     {
       id: 2,
-      title: 'JavaScript Fundamentals',
-      instructor: 'Mike Chen',
+      title: 'The Beginners',
+      instructor: 'Priyanshu Singh',
       rating: 4.7,
       students: 1890,
-      duration: '12 hours',
+      duration: '2 hours',
       image: '/api/placeholder/300/180',
       level: 'Beginner',
-      description: 'Master JavaScript basics and start building interactive websites',
-      topics: ['Variables & Functions', 'DOM Manipulation', 'Events', 'ES6 Features'],
+      description: 'start your college journey on the right foot.',
+      topics: ['Resource Guidance', 'Mentor Insights', 'Management Tips', 'FAQ'],
       certificate: true
     },
     {
       id: 3,
-      title: 'Digital Marketing Basics',
-      instructor: 'Emma Wilson',
+      title: 'Upcoming..',
+      instructor: '...',
       rating: 4.6,
-      students: 1450,
-      duration: '6 hours',
+      students: 0,
+      duration: '0 hours',
       image: '/api/placeholder/300/180',
       level: 'Beginner',
-      description: 'Learn fundamental digital marketing strategies',
-      topics: ['SEO Basics', 'Social Media Marketing', 'Content Marketing', 'Analytics'],
+      description: '...',
+      topics: ['..', '..', '..', '..'],
       certificate: true
     },
-    {
-      id: 4,
-      title: 'Python Programming Basics',
-      instructor: 'Dr. Alex Kumar',
-      rating: 4.9,
-      students: 3200,
-      duration: '10 hours',
-      image: '/api/placeholder/300/180',
-      level: 'Beginner',
-      description: 'Start your programming journey with Python',
-      topics: ['Python Syntax', 'Data Types', 'Control Structures', 'Functions'],
-      certificate: true
-    },
-    {
-      id: 5,
-      title: 'Graphic Design Essentials',
-      instructor: 'Lisa Rodriguez',
-      rating: 4.5,
-      students: 1120,
-      duration: '8 hours',
-      image: '/api/placeholder/300/180',
-      level: 'Beginner',
-      description: 'Learn design principles and create stunning graphics',
-      topics: ['Design Principles', 'Color Theory', 'Typography', 'Adobe Tools'],
-      certificate: true
-    },
-    {
-      id: 6,
-      title: 'Introduction to Data Analysis',
-      instructor: 'James Park',
-      rating: 4.7,
-      students: 980,
-      duration: '9 hours',
-      image: '/api/placeholder/300/180',
-      level: 'Beginner',
-      description: 'Discover the world of data analysis and visualization',
-      topics: ['Data Collection', 'Excel Basics', 'Charts & Graphs', 'Statistical Analysis'],
-      certificate: true
-    }
+    // {
+    //   id: 4,
+    //   title: 'Python Programming Basics',
+    //   instructor: 'Dr. Alex Kumar',
+    //   rating: 4.9,
+    //   students: 3200,
+    //   duration: '10 hours',
+    //   image: '/api/placeholder/300/180',
+    //   level: 'Beginner',
+    //   description: 'Start your programming journey with Python',
+    //   topics: ['Python Syntax', 'Data Types', 'Control Structures', 'Functions'],
+    //   certificate: true
+    // },
+    // {
+    //   id: 5,
+    //   title: 'Graphic Design Essentials',
+    //   instructor: 'Lisa Rodriguez',
+    //   rating: 4.5,
+    //   students: 1120,
+    //   duration: '8 hours',
+    //   image: '/api/placeholder/300/180',
+    //   level: 'Beginner',
+    //   description: 'Learn design principles and create stunning graphics',
+    //   topics: ['Design Principles', 'Color Theory', 'Typography', 'Adobe Tools'],
+    //   certificate: true
+    // },
+    // {
+    //   id: 6,
+    //   title: 'Introduction to Data Analysis',
+    //   instructor: 'James Park',
+    //   rating: 4.7,
+    //   students: 980,
+    //   duration: '9 hours',
+    //   image: '/api/placeholder/300/180',
+    //   level: 'Beginner',
+    //   description: 'Discover the world of data analysis and visualization',
+    //   topics: ['Data Collection', 'Excel Basics', 'Charts & Graphs', 'Statistical Analysis'],
+    //   certificate: true
+    // }
   ];
 
   return (
     <div className="free-courses-container">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Free Courses</h2>
+          <h2 className="section-title">Our Webinars</h2>
           <p className="section-description">
-            Start your learning journey with our completely free courses. No hidden costs, just quality education.
+            Guidance you can trust, from those who’ve walked the path. We share what works, so you can focus on what matters most.
           </p>
         </div>
 

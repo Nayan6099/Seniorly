@@ -4,88 +4,92 @@ import { Clock, Calendar, Bell, Users, Star, AlertCircle } from 'lucide-react';
 const UpcomingCourses = () => {
   const [notifiedCourses, setNotifiedCourses] = useState(new Set());
 
+   const [email, setEmail] = useState("");       // to track input
+  const [isSubscribed, setIsSubscribed] = useState(false); // to track subscription
+
+
   const upcomingCourses = [
     {
       id: 1,
-      title: 'Advanced React Development',
-      instructor: 'David Kumar',
-      launchDate: 'March 15, 2025',
-      duration: '20 hours',
+      title: 'Types of Development',
+      instructor: '..',
+      launchDate: 'soon',
+      duration: '',
       image: '/api/placeholder/300/180',
-      level: 'Advanced',
-      description: 'Master advanced React concepts including hooks, context, and performance optimization',
-      prerequisites: ['Basic React Knowledge', 'JavaScript ES6+', 'HTML/CSS'],
-      features: ['Live Sessions', 'Code Reviews', 'Project-Based Learning', 'Industry Mentorship'],
+      level: 'Beginner',
+      description: 'Find your path in dev',
+      prerequisites: ['What is Development', 'Types of Development', 'FAQ'],
+      features: ['Live Session', 'Reviews', 'certification', 'Live Mentorship'],
       estimatedStudents: '500+',
       earlyAccess: true
     },
     {
       id: 2,
-      title: 'Machine Learning Fundamentals',
-      instructor: 'Dr. Lisa Wong',
-      launchDate: 'March 22, 2025',
-      duration: '15 hours',
+      title: 'Knowing Fundamentals',
+      instructor: '..',
+      launchDate: 'soon',
+      duration: '',
       image: '/api/placeholder/300/180',
-      level: 'Intermediate',
-      description: 'Dive into machine learning algorithms and practical applications',
-      prerequisites: ['Python Programming', 'Basic Statistics', 'Mathematics'],
-      features: ['Hands-on Projects', 'Real Datasets', 'Industry Case Studies', 'Certification'],
+      level: 'Beginner',
+      description: 'Dive a little more',
+      prerequisites: ['..', '..', '..'],
+      features: ['Live Session', 'Live Mentorship', '..', 'Certification'],
       estimatedStudents: '300+',
       earlyAccess: false
     },
     {
       id: 3,
-      title: 'UI/UX Design Mastery',
-      instructor: 'Alex Thompson',
-      launchDate: 'April 5, 2025',
-      duration: '18 hours',
+      title: 'Revealing Soon',
+      instructor: '..',
+      launchDate: '..',
+      duration: '',
       image: '/api/placeholder/300/180',
       level: 'Beginner to Advanced',
-      description: 'Complete guide to user interface and user experience design',
-      prerequisites: ['Basic Design Knowledge', 'Creativity', 'Design Tools Access'],
-      features: ['Design Portfolio', 'Client Projects', 'Design System Creation', 'Peer Reviews'],
+      description: '..',
+      prerequisites: ['Basic', 'Creative', '..'],
+      features: ['LIve Session', 'Live Mentorship', 'certification', 'FAQ'],
       estimatedStudents: '400+',
       earlyAccess: true
     },
     {
       id: 4,
-      title: 'DevOps & Cloud Computing',
-      instructor: 'Michael Rodriguez',
-      launchDate: 'April 12, 2025',
-      duration: '25 hours',
+      title: 'Soon...',
+      instructor: '..',
+      launchDate: '..',
+      duration: '',
       image: '/api/placeholder/300/180',
       level: 'Intermediate',
-      description: 'Learn DevOps practices and cloud deployment strategies',
-      prerequisites: ['Linux Basics', 'Command Line', 'Basic Programming'],
-      features: ['AWS Certification Prep', 'Docker & Kubernetes', 'CI/CD Pipelines', 'Live Labs'],
+      description: '..',
+      prerequisites: ['.', '.', '.'],
+      features: ['.', '.', '.', '.'],
       estimatedStudents: '250+',
       earlyAccess: false
     },
     {
       id: 5,
-      title: 'Full Stack Web Development',
-      instructor: 'Sarah Chen',
-      launchDate: 'April 20, 2025',
-      duration: '30 hours',
+      title: 'Soon...',
+      instructor: '',
+      launchDate: '..',
+      duration: '',
       image: '/api/placeholder/300/180',
       level: 'Intermediate',
-      description: 'Build complete web applications from frontend to backend',
-      prerequisites: ['HTML/CSS/JS', 'Basic Programming', 'Database Concepts'],
-      features: ['Full Stack Projects', 'API Development', 'Database Design', 'Deployment'],
+      description: '..',
+      prerequisites: ['.', '.', '.'],
+      features: ['.', '.', '.', '.'],
       estimatedStudents: '600+',
       earlyAccess: true
     },
     {
       id: 6,
-      title: 'Blockchain & Cryptocurrency',
-      instructor: 'Dr. James Kim',
-      launchDate: 'May 1, 2025',
-      duration: '12 hours',
+      title: 'Soon...',
+      instructor: '..',
+      launchDate: '..',
+      duration: '',
       image: '/api/placeholder/300/180',
       level: 'Advanced',
-      description: 'Understand blockchain technology and develop smart contracts',
-      prerequisites: ['Programming Experience', 'Cryptography Basics', 'Finance Knowledge'],
-      features: ['Smart Contracts', 'DApp Development', 'Crypto Trading', 'Security Practices'],
+      description: '..',
+      prerequisites: ['.', '.', '.'],
+      features: ['.', '.', '.', '.'],
       estimatedStudents: '200+',
       earlyAccess: false
     }
@@ -95,6 +99,12 @@ const UpcomingCourses = () => {
     setNotifiedCourses(prev => new Set(prev).add(courseId));
     // Here you would typically make an API call to subscribe the user
     console.log(`Subscribed to notifications for course ${courseId}`);
+  };
+
+   const handleSubscribe = () => {
+    if (!email) return; // optional: ensure email is entered
+    setIsSubscribed(true);
+    // Optional: API call to save email here
   };
 
   const getDaysUntilLaunch = (launchDate) => {
@@ -109,9 +119,9 @@ const UpcomingCourses = () => {
     <div className="upcoming-courses-container">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Upcoming Courses</h2>
+          <h2 className="section-title">Upcoming Sessions</h2>
           <p className="section-description">
-            Get ready for our latest courses launching soon. Be the first to know and secure your spot!
+            Get ready for our latest Sessions comming soon. Be the first to know and secure your spot!
           </p>
         </div>
 
@@ -119,7 +129,7 @@ const UpcomingCourses = () => {
           <AlertCircle className="info-icon" />
           <div className="info-content">
             <h3>Early Bird Benefits</h3>
-            <p>Subscribe to get notified about course launches and receive exclusive early access and discounts!</p>
+            <p>Subscribe to get notified about Session launches and receive exclusive early access!</p>
           </div>
         </div>
 
@@ -191,19 +201,9 @@ const UpcomingCourses = () => {
                     <button
                       className={`notify-btn ${isNotified ? 'notified' : ''}`}
                       onClick={() => handleNotifyMe(course.id)}
-                      disabled={isNotified}
-                    >
-                      {isNotified ? (
-                        <>
-                          <Bell className="btn-icon" />
-                          You'll be notified!
-                        </>
-                      ) : (
-                        <>
-                          <Bell className="btn-icon" />
-                          Notify Me
-                        </>
-                      )}
+                      disabled={isNotified}>
+                      {isNotified ? (<><Bell className="btn-icon" />You'll be notified!</>) : (<>
+                        <Bell className="btn-icon" />Notify Me</>)}
                     </button>
                   </div>
                 </div>
@@ -214,15 +214,25 @@ const UpcomingCourses = () => {
 
         <div className="newsletter-signup">
           <div className="newsletter-content">
-            <h3>Never Miss a Course Launch</h3>
-            <p>Subscribe to our newsletter and get notified about all upcoming courses, early bird offers, and exclusive content.</p>
+            <h3>Never Miss an Event</h3>
+            <p>Subscribe to our newsletter and get notified about all upcoming sessions, early bird offers, and exclusive content.</p>
             <div className="newsletter-form">
               <input
                 type="email"
                 placeholder="Enter your email address"
                 className="newsletter-input"
+                value={email}
+                 onChange={(e) => setEmail(e.target.value)}
+            disabled={isSubscribed} // optional: disable input after subscribing
               />
-              <button className="newsletter-btn">Subscribe</button>
+              {/* <button className="newsletter-btn">Subscribe</button> */}
+               <button
+            className={`newsletter-btn ${isSubscribed ? 'subscribed' : ''}`}
+            onClick={handleSubscribe}
+            disabled={isSubscribed}
+          >
+            {isSubscribed ? "Subscribed" : "Subscribe"}
+          </button>
             </div>
           </div>
         </div>

@@ -38,14 +38,14 @@ const Home: React.FC = () => {
       <Banner />
       <main>
         <section className={styles.hero}>
-          <h1 className={styles.title}>Transform Your Future with Quality Education</h1>
+          <h1 className={styles.title}>Learn Better, Grow Smarter — You’re in the Right Place!</h1>
           <p className={styles.description}>
-            Discover world-class courses, expert instructors, and hands-on learning experiences 
-            designed to accelerate your career growth.
+            Discover smarter ways to study with curated resources and proven strategies.
+Here, we help you learn efficiently and achieve more with less stress.
           </p>
           <div className={styles.ctaButtons}>
-            <button className={styles.primaryBtn}>Explore Courses</button>
-            <button className={styles.secondaryBtn}>Start Free Trial</button>
+            <button className={styles.primaryBtn}>Start</button>
+            <button className={styles.secondaryBtn}>Upcoming</button>
           </div>
         </section>
         
@@ -58,23 +58,24 @@ const Home: React.FC = () => {
             <div className={styles.featuresGrid}>
               <div className={styles.featureCard}>
                 <div className={styles.featureIcon}>🎓</div>
-                <h3>Expert Instructors</h3>
-                <p>Learn from industry professionals with years of real-world experience</p>
+                <h3>Academic & Professional</h3>
+                <p>Your one-stop destination for Smart study methods and senior guidance.
+Because learning the right way makes all the difference.</p>
               </div>
               <div className={styles.featureCard}>
                 <div className={styles.featureIcon}>📱</div>
-                <h3>Mobile Learning</h3>
-                <p>Access your courses anywhere, anytime on any device</p>
+                <h3>Inspiring & Vision-Driven</h3>
+                <p>Seniorly is here to help you study better, not harder.</p>
               </div>
               <div className={styles.featureCard}>
                 <div className={styles.featureIcon}>🏆</div>
                 <h3>Certificates</h3>
-                <p>Earn industry-recognized certificates upon course completion</p>
+                <p>Earn certificates upon tasks completion</p>
               </div>
               <div className={styles.featureCard}>
                 <div className={styles.featureIcon}>💬</div>
                 <h3>Community</h3>
-                <p>Join a vibrant community of learners and professionals</p>
+                <p>Join a vibrant community of learners , professionals and seniors</p>
               </div>
             </div>
           </div>
@@ -84,20 +85,20 @@ const Home: React.FC = () => {
           <div className={styles.container}>
             <div className={styles.statsGrid}>
               <div className={styles.statCard}>
-                <h3>50,000+</h3>
+                <h3>50+</h3>
                 <p>Active Students</p>
               </div>
               <div className={styles.statCard}>
-                <h3>200+</h3>
-                <p>Expert Instructors</p>
+                <h3>20+</h3>
+                <p>Expert Seniors</p>
               </div>
               <div className={styles.statCard}>
-                <h3>500+</h3>
-                <p>Courses Available</p>
+                <h3>24hrs</h3>
+                <p>Availability</p>
               </div>
               <div className={styles.statCard}>
                 <h3>95%</h3>
-                <p>Success Rate</p>
+                <p>Networking Rate</p>
               </div>
             </div>
           </div>
