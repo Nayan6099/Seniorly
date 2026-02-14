@@ -29,11 +29,13 @@ app.use(limiter);
 // Middleware
 app.use(cors({
   origin:[
-     process.env.CLIENT_URL || 'https://seniorly-five.vercel.app',
-    'https://seniorly-backend.onrender.com',
-    'http://localhost:3000'
+     process.env.CLIENT_URL || 'https://seniorly-five.vercel.app',       // Your Vercel frontend
+    'https://seniorly-backend.onrender.com',  // Your backend
+    'http://localhost:3000',                   // For local development
+    'http://localhost:5000'  
     ],
-  credentials: true
+  credentials: true, methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(morgan('combined'));
 app.use(express.json({ limit: '10mb' }));
