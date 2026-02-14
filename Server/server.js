@@ -29,7 +29,8 @@ app.use(limiter);
 // Middleware
 app.use(cors({
   origin:[
-     process.env.CLIENT_URL || 'https://seniorly-five.vercel.app',       // Your Vercel frontend
+    'https://seniorly-five.vercel.app', 
+    'https://seniorly-alpha.vercel.app',
     'https://seniorly-backend.onrender.com',  // Your backend
     'http://localhost:3000',                   // For local development
     'http://localhost:5000'  
