@@ -42,45 +42,7 @@ const FreeCourses = () => {
       topics: ['..', '..', '..', '..'],
       certificate: true
     },
-    // {
-    //   id: 4,
-    //   title: 'Python Programming Basics',
-    //   instructor: 'Dr. Alex Kumar',
-    //   rating: 4.9,
-    //   students: 3200,
-    //   duration: '10 hours',
-    //   image: '/api/placeholder/300/180',
-    //   level: 'Beginner',
-    //   description: 'Start your programming journey with Python',
-    //   topics: ['Python Syntax', 'Data Types', 'Control Structures', 'Functions'],
-    //   certificate: true
-    // },
-    // {
-    //   id: 5,
-    //   title: 'Graphic Design Essentials',
-    //   instructor: 'Lisa Rodriguez',
-    //   rating: 4.5,
-    //   students: 1120,
-    //   duration: '8 hours',
-    //   image: '/api/placeholder/300/180',
-    //   level: 'Beginner',
-    //   description: 'Learn design principles and create stunning graphics',
-    //   topics: ['Design Principles', 'Color Theory', 'Typography', 'Adobe Tools'],
-    //   certificate: true
-    // },
-    // {
-    //   id: 6,
-    //   title: 'Introduction to Data Analysis',
-    //   instructor: 'James Park',
-    //   rating: 4.7,
-    //   students: 980,
-    //   duration: '9 hours',
-    //   image: '/api/placeholder/300/180',
-    //   level: 'Beginner',
-    //   description: 'Discover the world of data analysis and visualization',
-    //   topics: ['Data Collection', 'Excel Basics', 'Charts & Graphs', 'Statistical Analysis'],
-    //   certificate: true
-    // }
+    //  m
   ];
 
   return (
