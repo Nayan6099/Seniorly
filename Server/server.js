@@ -28,7 +28,11 @@ app.use(limiter);
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin:[
+     process.env.CLIENT_URL || 'https://seniorly-five.vercel.app',
+    'https://seniorly-backend.onrender.com',
+    'http://localhost:3000'
+    ],
   credentials: true
 }));
 app.use(morgan('combined'));
