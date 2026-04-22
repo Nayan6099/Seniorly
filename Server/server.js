@@ -27,6 +27,8 @@ app.use(cors({
     'https://seniorly-five.vercel.app', 
     'https://seniorly-alpha.vercel.app',
     'https://seniorly-backend.onrender.com',
+    'https://seniorly.space',
+    'http://seniorly.space',
     'http://localhost:3000',
     'http://localhost:5000'
   ],
