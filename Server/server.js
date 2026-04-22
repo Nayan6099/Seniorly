@@ -79,7 +79,9 @@ const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/seniorly');
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error('Database connection error:', error);
+    console.error('CRITICAL: Database connection failed!');
+    console.error('Error Name:', error.name);
+    console.error('Error Message:', error.message);
     process.exit(1);
   }
 };
