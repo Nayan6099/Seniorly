@@ -76,12 +76,23 @@ app.use('*', (req, res) => {
 // Database connection
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/seniorly');
+    const uri = process.env.MONGODB_URI;
+    
+    if (!uri || uri.includes('localhost')) {
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('MONGODB_URI is missing or pointing to localhost in PRODUCTION!');
+      }
+    }
+
+    const conn = await mongoose.connect(uri || 'mongodb://localhost:27017/seniorly');
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+    console.log(`Seniorly Backend is LIVE and Connected to Database Successfully`);
   } catch (error) {
     console.error('CRITICAL: Database connection failed!');
-    console.error('Error Name:', error.name);
     console.error('Error Message:', error.message);
+    if (!process.env.MONGODB_URI) {
+      console.error('HINT: The MONGODB_URI environment variable is UNDEFINED. Please check Render settings.');
+    }
     process.exit(1);
   }
 };
