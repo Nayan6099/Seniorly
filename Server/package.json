@@ -1,7 +1,7 @@
 {
-  "name": "edutech-backend",
+  "name": "seniorly-backend",
   "version": "1.0.0",
-  "description": "Backend for EduTech website",
+  "description": "Backend for Seniorly website",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -27,7 +27,7 @@
     "nodemon": "^3.0.2"
   },
   "keywords": [
-    "edutech",
+    "seniorly",
     "education",
     "backend",
     "api"

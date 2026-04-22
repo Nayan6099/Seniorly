@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const { body, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
 const Enrollment = require('../models/Enrollment');

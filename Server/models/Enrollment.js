@@ -200,9 +200,15 @@ enrollmentSchema.pre('save', async function(next) {
   next();
 });
 
+// Pre-save middleware to track if document is new
+enrollmentSchema.pre('save', function(next) {
+  this._wasNew = this.isNew;
+  next();
+});
+
 // Post-save middleware to update course enrollment count
 enrollmentSchema.post('save', async function() {
-  if (this.isNew) {
+  if (this._wasNew) {
     const Course = mongoose.model('Course');
     await Course.findByIdAndUpdate(this.course, {
       $inc: { enrollmentCount: 1 }
@@ -210,12 +216,14 @@ enrollmentSchema.post('save', async function() {
   }
 });
 
-// Post-remove middleware to decrease course enrollment count
-enrollmentSchema.post('remove', async function() {
-  const Course = mongoose.model('Course');
-  await Course.findByIdAndUpdate(this.course, {
-    $inc: { enrollmentCount: -1 }
-  });
+// Post-delete middleware to decrease course enrollment count
+enrollmentSchema.post('findOneAndDelete', async function(doc) {
+  if (doc) {
+    const Course = mongoose.model('Course');
+    await Course.findByIdAndUpdate(doc.course, {
+      $inc: { enrollmentCount: -1 }
+    });
+  }
 });
 
 // Static method to get enrollment statistics

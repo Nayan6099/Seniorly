@@ -254,17 +254,17 @@ courseSchema.pre('save', function(next) {
   next();
 });
 
-// Static method to get average rating
+// Static method to get average rating (uses Enrollment ratings)
 courseSchema.statics.calculateAverageRating = async function(courseId) {
-  const Review = mongoose.model('Review');
-  const stats = await Review.aggregate([
+  const Enrollment = mongoose.model('Enrollment');
+  const stats = await Enrollment.aggregate([
     {
-      $match: { course: courseId }
+      $match: { course: courseId, 'rating.value': { $exists: true, $ne: null } }
     },
     {
       $group: {
         _id: '$course',
-        averageRating: { $avg: '$rating' },
+        averageRating: { $avg: '$rating.value' },
         numReviews: { $sum: 1 }
       }
     }

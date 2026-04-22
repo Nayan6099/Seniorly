@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 // Create email transporter
 const createTransporter = () => {
-  return nodemailer.createTransporter({
+  return nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     secure: false, // true for 465, false for other ports
@@ -20,14 +20,14 @@ const emailTemplates = {
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 40px 20px; text-align: center;">
-          <h1 style="color: white; margin: 0;">Welcome to EduTech!</h1>
+          <h1 style="color: white; margin: 0;">Welcome to Seniorly!</h1>
         </div>
         <div style="padding: 40px 20px; background: #f8fafc;">
           <h2>Hi ${data.firstName},</h2>
           <p>Thank you for subscribing to our ${data.subscriptionType} updates!</p>
           <p>Please click the button below to confirm your email address:</p>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.CLIENT_URL}/api/emails/confirm/${data.token}" 
+            <a href="${process.env.API_URL || 'http://localhost:5000'}/api/emails/confirm/${data.token}" 
                style="background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
               Confirm Email
             </a>
@@ -35,7 +35,7 @@ const emailTemplates = {
           <p>If you didn't subscribe to our emails, you can safely ignore this message.</p>
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
-          <p>&copy; 2025 EduTech. All rights reserved.</p>
+          <p>&copy; 2025 Seniorly. All rights reserved.</p>
         </div>
       </div>
     `,
@@ -44,21 +44,21 @@ const emailTemplates = {
       
       Thank you for subscribing to our ${data.subscriptionType} updates!
       
-      Please confirm your email by visiting: ${process.env.CLIENT_URL}/api/emails/confirm/${data.token}
+      Please confirm your email by visiting: ${process.env.API_URL || 'http://localhost:5000'}/api/emails/confirm/${data.token}
       
       If you didn't subscribe to our emails, you can safely ignore this message.
       
       Best regards,
-      EduTech Team
+      Seniorly Team
     `
   }),
 
   welcome: (data) => ({
-    subject: 'Welcome to EduTech Community!',
+    subject: 'Welcome to Seniorly Community!',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 40px 20px; text-align: center;">
-          <h1 style="color: white; margin: 0;">Welcome to EduTech!</h1>
+          <h1 style="color: white; margin: 0;">Welcome to Seniorly!</h1>
         </div>
         <div style="padding: 40px 20px; background: #f8fafc;">
           <h2>Hi ${data.firstName},</h2>
@@ -79,7 +79,7 @@ const emailTemplates = {
           <p>Happy learning!</p>
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
-          <p>&copy; 2025 EduTech. All rights reserved.</p>
+          <p>&copy; 2025 Seniorly. All rights reserved.</p>
           <p><a href="${process.env.CLIENT_URL}/unsubscribe?email=${data.email}" style="color: #a0aec0;">Unsubscribe</a></p>
         </div>
       </div>
@@ -98,7 +98,7 @@ const emailTemplates = {
       Browse our courses: ${process.env.CLIENT_URL}/courses
       
       Happy learning!
-      EduTech Team
+      Seniorly Team
     `
   }),
 
@@ -128,7 +128,7 @@ const emailTemplates = {
           <p>Need help? Contact our support team anytime.</p>
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
-          <p>&copy; 2025 EduTech. All rights reserved.</p>
+          <p>&copy; 2025 Seniorly. All rights reserved.</p>
         </div>
       </div>
     `,
@@ -147,7 +147,7 @@ const emailTemplates = {
       Need help? Contact our support team anytime.
       
       Best regards,
-      EduTech Team
+      Seniorly Team
     `
   }),
 
@@ -187,7 +187,7 @@ const emailTemplates = {
           <p style="font-size: 14px; color: #64748b;">Don't want these notifications? <a href="${data.unsubscribeUrl}">Unsubscribe here</a></p>
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
-          <p>&copy; 2025 EduTech. All rights reserved.</p>
+          <p>&copy; 2025 Seniorly. All rights reserved.</p>
         </div>
       </div>
     `,
@@ -211,7 +211,7 @@ const emailTemplates = {
       Don't want these notifications? Unsubscribe: ${data.unsubscribeUrl}
       
       Best regards,
-      EduTech Team
+      Seniorly Team
     `
   }),
 
@@ -242,7 +242,7 @@ const emailTemplates = {
           <p>Keep learning and growing with us. Check out our other courses to continue your education.</p>
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
-          <p>&copy; 2025 EduTech. All rights reserved.</p>
+          <p>&copy; 2025 Seniorly. All rights reserved.</p>
         </div>
       </div>
     `,
@@ -263,16 +263,16 @@ const emailTemplates = {
       Share your achievement and keep learning with us!
       
       Best regards,
-      EduTech Team
+      Seniorly Team
     `
   }),
 
   newsletter: (data) => ({
-    subject: data.subject || 'EduTech Newsletter',
+    subject: data.subject || 'Seniorly Newsletter',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 40px 20px; text-align: center;">
-          <h1 style="color: white; margin: 0;">EduTech Newsletter</h1>
+          <h1 style="color: white; margin: 0;">Seniorly Newsletter</h1>
         </div>
         <div style="padding: 40px 20px; background: #f8fafc;">
           <h2>Hi ${data.firstName},</h2>
@@ -307,7 +307,7 @@ const emailTemplates = {
           </p>
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
-          <p>&copy; 2025 EduTech. All rights reserved.</p>
+          <p>&copy; 2025 Seniorly. All rights reserved.</p>
         </div>
       </div>
     `,
@@ -329,7 +329,7 @@ const emailTemplates = {
       Don't want to receive our newsletter? Unsubscribe: ${process.env.CLIENT_URL}/unsubscribe?email=${data.email}
       
       Best regards,
-      EduTech Team
+      Seniorly Team
     `
   })
 };
@@ -343,7 +343,7 @@ const sendConfirmationEmail = async (email, token, data) => {
   const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
-    from: `"EduTech" <${process.env.EMAIL_USER}>`,
+    from: `"Seniorly" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: template.subject,
     html: template.html + trackingPixel,
@@ -359,7 +359,7 @@ const sendWelcomeEmail = async (email, data) => {
   const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
-    from: `"EduTech" <${process.env.EMAIL_USER}>`,
+    from: `"Seniorly" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: template.subject,
     html: template.html + trackingPixel,
@@ -375,7 +375,7 @@ const sendEnrollmentConfirmation = async (email, data) => {
   const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
-    from: `"EduTech" <${process.env.EMAIL_USER}>`,
+    from: `"Seniorly" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: template.subject,
     html: template.html + trackingPixel,
@@ -392,7 +392,7 @@ const sendCourseNotification = async (email, data) => {
   const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
-    from: `"EduTech" <${process.env.EMAIL_USER}>`,
+    from: `"Seniorly" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: template.subject,
     html: template.html + trackingPixel,
@@ -408,7 +408,7 @@ const sendCertificate = async (email, data) => {
   const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
-    from: `"EduTech" <${process.env.EMAIL_USER}>`,
+    from: `"Seniorly" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: template.subject,
     html: template.html + trackingPixel,
@@ -424,7 +424,7 @@ const sendNewsletter = async (email, data) => {
   const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
-    from: `"EduTech" <${process.env.EMAIL_USER}>`,
+    from: `"Seniorly" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: template.subject,
     html: template.html + trackingPixel,

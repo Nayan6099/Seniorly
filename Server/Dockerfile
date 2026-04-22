@@ -15,14 +15,14 @@ COPY . .
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
-RUN adduser -S edutech -u 1001
+RUN adduser -S seniorly -u 1001
 
 # Create directories for uploads and logs
 RUN mkdir -p /app/uploads /app/logs
-RUN chown -R edutech:nodejs /app
+RUN chown -R seniorly:nodejs /app
 
 # Switch to non-root user
-USER edutech
+USER seniorly
 
 # Expose port
 EXPOSE 5000

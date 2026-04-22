@@ -1,122 +1,101 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, Users, Clock, Play } from 'lucide-react';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8888';
+
 const FreeCourses = () => {
-  const freeCourses = [
-    {
-      id: 1,
-      title: 'Introduction to Seniorly',
-      instructor: 'Mukul Pundir',
-      rating: 4.8,
-      students: 2540,
-      duration: '1 hour',
-      image: '/api/placeholder/300/180',
-      level: 'Beginner',
-      description: 'Let us know each other better',
-      topics: ['Who are we', 'What we aim', 'What you get', 'FAQ'],
-      certificate: true
-    },
-    {
-      id: 2,
-      title: 'The Beginners',
-      instructor: 'Priyanshu Singh',
-      rating: 4.7,
-      students: 1890,
-      duration: '2 hours',
-      image: '/api/placeholder/300/180',
-      level: 'Beginner',
-      description: 'start your college journey on the right foot.',
-      topics: ['Resource Guidance', 'Mentor Insights', 'Management Tips', 'FAQ'],
-      certificate: true
-    },
-    {
-      id: 3,
-      title: 'Upcoming..',
-      instructor: '...',
-      rating: 4.6,
-      students: 0,
-      duration: '0 hours',
-      image: '/api/placeholder/300/180',
-      level: 'Beginner',
-      description: '...',
-      topics: ['..', '..', '..', '..'],
-      certificate: true
-    },
-    //  m
-  ];
+  const [freeCourses, setFreeCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFreeCourses = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/courses?status=published&isFree=true`);
+        const result = await response.json();
+        if (result.success) {
+          setFreeCourses(result.data);
+        }
+      } catch (error) {
+        console.error('Error fetching free courses:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFreeCourses();
+  }, []);
+
+  if (loading) return <div style={{textAlign: 'center', padding: '50px'}}>Loading sessions...</div>;
 
   return (
-    <div className="free-courses-container">
+    <div className="free-courses-container" id="webinars">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Our Webinars</h2>
+          <h2 className="section-title">Free Smart Sessions</h2>
           <p className="section-description">
-            Guidance you can trust, from those who’ve walked the path. We share what works, so you can focus on what matters most.
+            Access our high-quality study sessions for free and start your journey to smarter learning today.
           </p>
         </div>
 
         <div className="courses-grid">
-          {freeCourses.map((course) => (
-            <div key={course.id} className="course-card">
-              <div className="course-image">
-                <img src={course.image} alt={course.title} />
-                <div className="course-overlay">
-                  <Play className="play-icon" />
-                </div>
-                <div className="free-badge">FREE</div>
-              </div>
-              
-              <div className="course-content">
-                <div className="course-header">
-                  <span className="course-level">{course.level}</span>
-                  <div className="course-rating">
-                    <Star className="star-icon" />
-                    <span>{course.rating}</span>
+          {freeCourses.length > 0 ? (
+            freeCourses.map((course) => (
+              <div key={course._id} className="course-card">
+                <div className="course-image">
+                  <img src={course.image?.url || 'https://placehold.co/300x180?text=Session'} alt={course.title} />
+                  <div className="course-overlay">
+                    <Play className="play-icon" />
                   </div>
+                  <div className="free-badge">FREE</div>
                 </div>
                 
-                <h3 className="course-title">{course.title}</h3>
-                <p className="course-instructor">by {course.instructor}</p>
-                <p className="course-description">{course.description}</p>
-                
-                <div className="course-topics">
-                  <h4>What you'll learn:</h4>
-                  <ul>
-                    {course.topics.slice(0, 3).map((topic, index) => (
-                      <li key={index}>{topic}</li>
-                    ))}
-                    {course.topics.length > 3 && (
-                      <li>+ {course.topics.length - 3} more topics</li>
-                    )}
-                  </ul>
-                </div>
-                
-                <div className="course-meta">
-                  <div className="meta-item">
-                    <Users className="meta-icon" />
-                    <span>{course.students.toLocaleString()} students</span>
+                <div className="course-content">
+                  <div className="course-header">
+                    <span className="course-level">{course.level}</span>
+                    <div className="course-rating">
+                      <Star className="star-icon" fill="currentColor" />
+                      <span>{course.averageRating} ({course.numberOfRatings})</span>
+                    </div>
                   </div>
-                  <div className="meta-item">
-                    <Clock className="meta-icon" />
-                    <span>{course.duration}</span>
+                  
+                  <h3 className="course-title">{course.title}</h3>
+                  <p className="course-instructor">by {course.instructor?.firstName} {course.instructor?.lastName}</p>
+                  <p className="course-description">{course.shortDescription}</p>
+                  
+                  <div className="course-topics">
+                    <h4>What you'll learn:</h4>
+                    <ul>
+                      {course.whatYouWillLearn?.slice(0, 3).map((topic, index) => (
+                        <li key={index}>{topic}</li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-                
-                <div className="course-footer">
-                  <div className="course-features">
-                    {course.certificate && (
-                      <span className="certificate-badge">📜 Certificate Included</span>
-                    )}
+                  
+                  <div className="course-meta">
+                    <div className="meta-item">
+                      <Clock className="meta-icon" />
+                      <span>{course.duration?.hours} hours</span>
+                    </div>
+                    <div className="meta-item">
+                      <Users className="meta-icon" />
+                      <span>{course.studentsEnrolled} students</span>
+                    </div>
                   </div>
-                  <button className="enroll-btn">Start Learning</button>
+                  
+                  <div className="course-footer">
+                    <span className="certificate-badge">✓ Certificate Included</span>
+                    <button className="enroll-btn" onClick={() => window.location.href = `/login`}>Enroll Now</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p style={{gridColumn: '1/-1', textAlign: 'center'}}>No free sessions available at the moment. Check back soon!</p>
+          )}
         </div>
 
         <div className="view-all">
-          <button className="view-all-btn">View All Free Courses</button>
+          <button className="view-all-btn">View All Sessions</button>
         </div>
       </div>
     </div>

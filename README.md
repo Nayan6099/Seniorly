@@ -1,4 +1,4 @@
-# EduTech Platform - Complete Learning Management System
+# Seniorly Platform - Complete Learning Management System
 
 A modern, full-featured educational technology platform built with Next.js, Node.js, and MongoDB. Features course management, user enrollment, email notifications, and comprehensive analytics.
 
@@ -53,8 +53,8 @@ Before running this application, make sure you have:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/edutech-platform.git
-cd edutech-platform
+git clone https://github.com/yourusername/seniorly-platform.git
+cd seniorly-platform
 ```
 
 ### 2. Backend Setup
@@ -84,7 +84,7 @@ NODE_ENV=development
 CLIENT_URL=http://localhost:3000
 
 # Database Configuration
-MONGODB_URI=mongodb://localhost:27017/edutech
+MONGODB_URI=mongodb://localhost:27017/seniorly
 
 # JWT Configuration
 JWT_SECRET=your_super_secret_jwt_key_here
@@ -97,7 +97,7 @@ EMAIL_USER=your_email@gmail.com
 EMAIL_PASS=your_app_password
 
 # Admin Configuration
-ADMIN_EMAIL=admin@edutech.com
+ADMIN_EMAIL=admin@seniorly.com
 ADMIN_PASSWORD=admin123
 ```
 
@@ -175,8 +175,8 @@ The frontend will be available at `http://localhost:3000`
 ### 1. Using Docker Compose
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/edutech-platform.git
-cd edutech-platform
+git clone https://github.com/yourusername/seniorly-platform.git
+cd seniorly-platform
 
 # Copy environment file
 cp .env.example .env
@@ -194,24 +194,24 @@ docker-compose down
 ### 2. Individual Container Setup
 ```bash
 # Build backend image
-docker build -t edutech-backend .
+docker build -t seniorly-backend .
 
 # Run MongoDB
 docker run -d --name mongodb -p 27017:27017 mongo:7.0
 
 # Run backend
-docker run -d --name edutech-backend -p 5000:5000 --link mongodb edutech-backend
+docker run -d --name seniorly-backend -p 5000:5000 --link mongodb seniorly-backend
 
 # Run frontend
 cd frontend
-docker build -t edutech-frontend .
-docker run -d --name edutech-frontend -p 3000:3000 edutech-frontend
+docker build -t seniorly-frontend .
+docker run -d --name seniorly-frontend -p 3000:3000 seniorly-frontend
 ```
 
 ## 📁 Project Structure
 
 ```
-edutech-platform/
+seniorly-platform/
 ├── backend/
 │   ├── models/              # Database models
 │   │   ├── User.js
@@ -482,7 +482,7 @@ npm install -g pm2
 # Build and start backend
 cd backend
 npm install --production
-pm2 start server.js --name "edutech-backend"
+pm2 start server.js --name "seniorly-backend"
 ```
 
 2. **Frontend Deployment**
@@ -491,7 +491,7 @@ pm2 start server.js --name "edutech-backend"
 cd frontend
 npm install --production
 npm run build
-pm2 start npm --name "edutech-frontend" -- start
+pm2 start npm --name "seniorly-frontend" -- start
 ```
 
 ## 🔒 Security Features
@@ -579,7 +579,7 @@ docker-compose up --build
 
 ## 📧 Support
 
-For support, email support@edutech.com or create an issue on GitHub.
+For support, email support@seniorly.com or create an issue on GitHub.
 
 ## 📄 License
 
@@ -591,6 +591,12 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - MongoDB team for the robust database
 - All open-source contributors
 
+---
+<!-- docker-compose -f docker-compose.dev.yml up
+ -->
+
+<!-- Frontend: http://localhost:3000
+Backend API: http://localhost:5000 -->
 ---
 
 Made with ❤️ by the Seniorly Team

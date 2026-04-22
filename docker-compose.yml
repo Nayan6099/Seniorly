@@ -4,24 +4,24 @@ services:
   # MongoDB Database
   mongodb:
     image: mongo:7.0
-    container_name: edutech-mongodb
+    container_name: seniorly-mongodb
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-admin}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-password123}
-      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-edutech}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-seniorly}
     ports:
-      - "${MONGO_PORT:-27017}:27017"
+      - "${MONGO_PORT:-27018}:27017"
     volumes:
       - mongodb_data:/data/db
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
-      - edutech-network
+      - seniorly-network
 
   # Redis for caching and sessions
   redis:
     image: redis:7-alpine
-    container_name: edutech-redis
+    container_name: seniorly-redis
     restart: unless-stopped
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
     ports:
@@ -29,17 +29,17 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - edutech-network
+      - seniorly-network
 
   # Backend API
   backend:
-    build: .
-    container_name: edutech-backend
+    build: ./Server
+    container_name: seniorly-backend
     restart: unless-stopped
     environment:
       NODE_ENV: ${NODE_ENV:-development}
       PORT: ${PORT:-5000}
-      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-password123}@mongodb:27017/${MONGO_DB_NAME:-edutech}?authSource=admin
+      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-password123}@mongodb:27017/${MONGO_DB_NAME:-seniorly}?authSource=admin
       REDIS_URL: redis://default:${REDIS_PASSWORD:-redis123}@redis:6379
       JWT_SECRET: ${JWT_SECRET:-your_super_secret_jwt_key_here}
       JWT_EXPIRE: ${JWT_EXPIRE:-7d}
@@ -58,14 +58,14 @@ services:
       - ./uploads:/app/uploads
       - ./logs:/app/logs
     networks:
-      - edutech-network
+      - seniorly-network
 
   # Frontend (Next.js)
   frontend:
     build:
-      context: ./frontend
+      context: ./my-nextjs-app
       dockerfile: Dockerfile
-    container_name: edutech-frontend
+    container_name: seniorly-frontend
     restart: unless-stopped
     environment:
       NEXT_PUBLIC_API_URL: ${API_URL:-http://localhost:5000}
@@ -75,12 +75,12 @@ services:
     depends_on:
       - backend
     networks:
-      - edutech-network
+      - seniorly-network
 
   # Nginx reverse proxy
   nginx:
     image: nginx:alpine
-    container_name: edutech-nginx
+    container_name: seniorly-nginx
     restart: unless-stopped
     ports:
       - "80:80"
@@ -92,12 +92,12 @@ services:
       - frontend
       - backend
     networks:
-      - edutech-network
+      - seniorly-network
 
   # Monitoring with Prometheus
   prometheus:
     image: prom/prometheus:latest
-    container_name: edutech-prometheus
+    container_name: seniorly-prometheus
     restart: unless-stopped
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -110,12 +110,12 @@ services:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
     networks:
-      - edutech-network
+      - seniorly-network
 
   # Grafana for visualization
   grafana:
     image: grafana/grafana:latest
-    container_name: edutech-grafana
+    container_name: seniorly-grafana
     restart: unless-stopped
     environment:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin123}
@@ -128,18 +128,18 @@ services:
     depends_on:
       - prometheus
     networks:
-      - edutech-network
+      - seniorly-network
 
   # Email service (MailHog for development)
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: edutech-mailhog
+    container_name: seniorly-mailhog
     restart: unless-stopped
     ports:
       - "1025:1025"  # SMTP
       - "8025:8025"  # Web UI
     networks:
-      - edutech-network
+      - seniorly-network
 
 volumes:
   mongodb_data:
@@ -152,5 +152,5 @@ volumes:
     driver: local
 
 networks:
-  edutech-network:
+  seniorly-network:
     driver: bridge

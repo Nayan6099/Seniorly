@@ -12,7 +12,7 @@ const Enrollment = require('../models/Enrollment');
 // Connect to MongoDB
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/edutech');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/seniorly');
     console.log('MongoDB Connected for seeding...');
   } catch (error) {
     console.error('Database connection error:', error);
@@ -28,7 +28,7 @@ const sampleUsers = [
     email: 'john.doe@example.com',
     password: 'password123',
     role: 'student',
-    phone: '+1234567890',
+    phone: '+919876543210',
     bio: 'Passionate about web development and always eager to learn new technologies.',
     skills: ['JavaScript', 'React', 'Node.js'],
     interests: ['Web Development', 'Mobile Development'],
@@ -41,7 +41,7 @@ const sampleUsers = [
     email: 'jane.smith@example.com',
     password: 'password123',
     role: 'instructor',
-    phone: '+1234567891',
+    phone: '+919876543211',
     bio: 'Senior software engineer with 10+ years of experience in full-stack development.',
     skills: ['JavaScript', 'Python', 'React', 'Django', 'AWS'],
     interests: ['Web Development', 'Data Science'],
@@ -59,11 +59,11 @@ const sampleUsers = [
   {
     firstName: 'Admin',
     lastName: 'User',
-    email: 'admin@edutech.com',
+    email: 'admin@seniorly.com',
     password: 'admin123',
     role: 'admin',
-    phone: '+1234567892',
-    bio: 'EduTech platform administrator',
+    phone: '+919876543212',
+    bio: 'Seniorly platform administrator',
     isActive: true,
     isVerified: true
   },
@@ -73,7 +73,7 @@ const sampleUsers = [
     email: 'sarah.johnson@example.com',
     password: 'password123',
     role: 'instructor',
-    phone: '+1234567893',
+    phone: '+919876543213',
     bio: 'Expert in HTML, CSS, and responsive design with a passion for teaching.',
     skills: ['HTML', 'CSS', 'JavaScript', 'UI/UX Design'],
     interests: ['Web Development', 'Design'],
@@ -86,7 +86,7 @@ const sampleUsers = [
     email: 'mike.chen@example.com',
     password: 'password123',
     role: 'instructor',
-    phone: '+1234567894',
+    phone: '+919876543214',
     bio: 'JavaScript developer and educator with expertise in modern frameworks.',
     skills: ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'Node.js'],
     interests: ['Web Development', 'Mobile Development'],
@@ -142,7 +142,7 @@ const createSampleCourses = async (instructors) => {
       price: { current: 0, original: 49.99, currency: 'USD' },
       isFree: true,
       image: {
-        url: '/api/placeholder/300/180',
+        url: 'https://placehold.co/300x180?text=Session',
         alt: 'HTML CSS Course'
       },
       curriculum: [
@@ -192,7 +192,7 @@ const createSampleCourses = async (instructors) => {
       price: { current: 0, original: 59.99, currency: 'USD' },
       isFree: true,
       image: {
-        url: '/api/placeholder/300/180',
+        url: 'https://placehold.co/300x180?text=Session',
         alt: 'Python Course'
       },
       curriculum: [
@@ -218,6 +218,89 @@ const createSampleCourses = async (instructors) => {
       status: 'published',
       rating: { average: 4.9, count: 3200 },
       enrollmentCount: 3200,
+      certificateOffered: true
+    },
+    {
+      title: 'JavaScript Fundamentals',
+      slug: 'javascript-fundamentals',
+      description: 'Master JavaScript basics and start building interactive websites. Learn variables, functions, DOM manipulation, and modern ES6 features.',
+      shortDescription: 'Master JavaScript basics and start building interactive websites',
+      instructor: instructors.find(i => i.email === 'mike.chen@example.com')._id,
+      category: 'Web Development',
+      subcategory: 'Programming',
+      level: 'Beginner',
+      duration: { hours: 12, lectures: 36 },
+      price: { current: 0, original: 79.99, currency: 'USD' },
+      isFree: true,
+      image: {
+        url: 'https://placehold.co/300x180?text=Session',
+        alt: 'JavaScript Course'
+      },
+      curriculum: [
+        {
+          title: 'JavaScript Basics',
+          lectures: [
+            { title: 'Variables and Data Types', duration: 20, isFree: true },
+            { title: 'Functions', duration: 25, isFree: false },
+            { title: 'Control Structures', duration: 30, isFree: false }
+          ],
+          totalDuration: 75
+        }
+      ],
+      requirements: ['Basic HTML/CSS knowledge', 'Web browser'],
+      whatYouWillLearn: [
+        'Variables & Functions',
+        'DOM Manipulation',
+        'Events',
+        'ES6 Features'
+      ],
+      targetAudience: ['HTML/CSS learners', 'Aspiring developers'],
+      tags: ['javascript', 'programming', 'web development'],
+      status: 'published',
+      rating: { average: 4.7, count: 1890 },
+      enrollmentCount: 1890,
+      certificateOffered: true
+    },
+    {
+      title: 'Advanced React Development',
+      slug: 'advanced-react-development',
+      description: 'Master advanced React concepts including hooks, context, performance optimization, and testing. Build production-ready applications.',
+      shortDescription: 'Master advanced React concepts including hooks, context, and performance optimization',
+      instructor: instructors.find(i => i.email === 'jane.smith@example.com')._id,
+      category: 'Web Development',
+      subcategory: 'Frontend Framework',
+      level: 'Advanced',
+      duration: { hours: 20, lectures: 45 },
+      price: { current: 99.99, original: 149.99, currency: 'USD' },
+      isFree: false,
+      image: {
+        url: 'https://placehold.co/300x180?text=Session',
+        alt: 'React Course'
+      },
+      curriculum: [
+        {
+          title: 'Advanced Hooks',
+          lectures: [
+            { title: 'useEffect Deep Dive', duration: 35, isFree: true },
+            { title: 'Custom Hooks', duration: 40, isFree: false },
+            { title: 'useContext and useReducer', duration: 45, isFree: false }
+          ],
+          totalDuration: 120
+        }
+      ],
+      requirements: ['Basic React Knowledge', 'JavaScript ES6+', 'HTML/CSS'],
+      whatYouWillLearn: [
+        'Advanced React Hooks',
+        'Context API',
+        'Performance Optimization',
+        'Testing React Apps'
+      ],
+      targetAudience: ['React developers', 'Frontend engineers'],
+      tags: ['react', 'javascript', 'hooks', 'advanced'],
+      status: 'coming_soon',
+      launchDate: new Date('2025-03-15'),
+      rating: { average: 0, count: 0 },
+      enrollmentCount: 0,
       certificateOffered: true
     }
   ];
@@ -402,7 +485,7 @@ const seedDatabase = async () => {
     console.log('\n🔐 Test Accounts:');
     console.log('Student: john.doe@example.com / password123');
     console.log('Instructor: jane.smith@example.com / password123');
-    console.log('Admin: admin@edutech.com / admin123');
+    console.log('Admin: admin@seniorly.com / admin123');
     
     process.exit(0);
     
@@ -425,87 +508,4 @@ module.exports = {
   seedEmailSubscriptions,
   seedCourseNotifications,
   seedEnrollments
-};,
-    {
-      title: 'JavaScript Fundamentals',
-      slug: 'javascript-fundamentals',
-      description: 'Master JavaScript basics and start building interactive websites. Learn variables, functions, DOM manipulation, and modern ES6 features.',
-      shortDescription: 'Master JavaScript basics and start building interactive websites',
-      instructor: instructors.find(i => i.email === 'mike.chen@example.com')._id,
-      category: 'Web Development',
-      subcategory: 'Programming',
-      level: 'Beginner',
-      duration: { hours: 12, lectures: 36 },
-      price: { current: 0, original: 79.99, currency: 'USD' },
-      isFree: true,
-      image: {
-        url: '/api/placeholder/300/180',
-        alt: 'JavaScript Course'
-      },
-      curriculum: [
-        {
-          title: 'JavaScript Basics',
-          lectures: [
-            { title: 'Variables and Data Types', duration: 20, isFree: true },
-            { title: 'Functions', duration: 25, isFree: false },
-            { title: 'Control Structures', duration: 30, isFree: false }
-          ],
-          totalDuration: 75
-        }
-      ],
-      requirements: ['Basic HTML/CSS knowledge', 'Web browser'],
-      whatYouWillLearn: [
-        'Variables & Functions',
-        'DOM Manipulation',
-        'Events',
-        'ES6 Features'
-      ],
-      targetAudience: ['HTML/CSS learners', 'Aspiring developers'],
-      tags: ['javascript', 'programming', 'web development'],
-      status: 'published',
-      rating: { average: 4.7, count: 1890 },
-      enrollmentCount: 1890,
-      certificateOffered: true
-    },
-    {
-      title: 'Advanced React Development',
-      slug: 'advanced-react-development',
-      description: 'Master advanced React concepts including hooks, context, performance optimization, and testing. Build production-ready applications.',
-      shortDescription: 'Master advanced React concepts including hooks, context, and performance optimization',
-      instructor: instructors.find(i => i.email === 'jane.smith@example.com')._id,
-      category: 'Web Development',
-      subcategory: 'Frontend Framework',
-      level: 'Advanced',
-      duration: { hours: 20, lectures: 45 },
-      price: { current: 99.99, original: 149.99, currency: 'USD' },
-      isFree: false,
-      image: {
-        url: '/api/placeholder/300/180',
-        alt: 'React Course'
-      },
-      curriculum: [
-        {
-          title: 'Advanced Hooks',
-          lectures: [
-            { title: 'useEffect Deep Dive', duration: 35, isFree: true },
-            { title: 'Custom Hooks', duration: 40, isFree: false },
-            { title: 'useContext and useReducer', duration: 45, isFree: false }
-          ],
-          totalDuration: 120
-        }
-      ],
-      requirements: ['Basic React Knowledge', 'JavaScript ES6+', 'HTML/CSS'],
-      whatYouWillLearn: [
-        'Advanced React Hooks',
-        'Context API',
-        'Performance Optimization',
-        'Testing React Apps'
-      ],
-      targetAudience: ['React developers', 'Frontend engineers'],
-      tags: ['react', 'javascript', 'hooks', 'advanced'],
-      status: 'coming_soon',
-      launchDate: new Date('2025-03-15'),
-      rating: { average: 0, count: 0 },
-      enrollmentCount: 0,
-      certificateOffered: true
-    }
+};

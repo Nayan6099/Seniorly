@@ -13,6 +13,13 @@ const Banner: React.FC = () => {
   const nextSlide = () => setCurrent((current + 1) % slides.length);
   const prevSlide = () => setCurrent((current - 1 + slides.length) % slides.length);
 
+  const scrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="banner-slideshow">
       <div className="slideshow-container">
@@ -29,8 +36,8 @@ const Banner: React.FC = () => {
         <button className="next" onClick={nextSlide}>&#10095;</button>
       </div>
       <div className="banner-content">
-        <a href="#" className="banner-btn">Contact</a>
-        <a href="#" className="banner-btn">About</a>
+        <a href="#footer" className="banner-btn" onClick={(e) => { e.preventDefault(); scrollTo('footer'); }}>Contact</a>
+        <a href="#webinars" className="banner-btn" onClick={(e) => { e.preventDefault(); scrollTo('webinars'); }}>Explore</a>
       </div>
     </div>
   );
