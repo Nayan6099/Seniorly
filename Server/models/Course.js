@@ -292,6 +292,5 @@ courseSchema.index({ featured: 1, trending: 1, bestseller: 1 });
 courseSchema.index({ 'rating.average': -1 });
 courseSchema.index({ createdAt: -1 });
 courseSchema.index({ price: 1 });
-courseSchema.index({ slug: 1 });
 
 module.exports = mongoose.model('Course', courseSchema);
