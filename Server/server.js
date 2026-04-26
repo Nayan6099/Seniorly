@@ -22,30 +22,26 @@ app.use(helmet({
 }));
 
 // Middleware
+// CORS Configuration
+const allowedOriginRegex = /https?:\/\/(.*\.?seniorly\.space|seniorly-.*\.vercel\.app|seniorly-backend\.onrender\.com|localhost|127\.0\.0\.1)(:\d+)?$/;
+
 app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'https://seniorly-five.vercel.app',
-      'https://seniorly-alpha.vercel.app',
-      'https://seniorly-backend.onrender.com',
-      'http://localhost:3000',
-      'http://localhost:5000'
-    ];
-    
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1 || origin.includes('seniorly.space')) {
+  origin: (origin, callback) => {
+    if (!origin || allowedOriginRegex.test(origin)) {
       callback(null, true);
     } else {
       console.log('CORS Blocked Origin:', origin);
-      callback(new Error('Not allowed by CORS'));
+      callback(null, false);
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Set-Cookie']
 }));
+
+// Explicitly handle OPTIONS preflight requests
+app.options('*', cors());
 app.use(morgan('combined'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
