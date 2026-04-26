@@ -57,37 +57,26 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Database Seeding Route (Temporary)
+app.get('/seed-db', async (req, res) => {
+  try {
+    if (req.query.key !== 'seniorly_secret_123') return res.status(403).send('Forbidden');
+    const { seedUsers, seedCourses } = require('./scripts/seedData');
+    const users = await seedUsers();
+    const instructors = users.filter(u => u.role === 'instructor');
+    await seedCourses(instructors);
+    res.send('Database Seeded Successfully!');
+  } catch (error) {
+    res.status(500).send('Seeding Failed: ' + error.message);
+  }
+});
+
 // API Routes
 app.use('/api/emails', emailRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/enrollments', enrollmentRoutes);
 
-// Database Seeding Route (Temporary)
-const { seedDatabase } = require('./scripts/seedData');
-app.get('/api/seed-database-secret', async (req, res) => {
-  try {
-    // Only allow this if a specific header or query param is present
-    if (req.query.key !== 'seniorly_secret_123') {
-      return res.status(403).send('Forbidden');
-    }
-    
-    // We don't want to exit the process in a live server
-    const Course = require('./models/Course');
-    const User = require('./models/User');
-    const { seedUsers, seedCourses } = require('./scripts/seedData');
-    
-    // Simple version for live server
-    const users = await seedUsers();
-    const instructors = users.filter(u => u.role === 'instructor');
-    await seedCourses(instructors);
-    
-    res.send('Database Seeded Successfully!');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Seeding Failed: ' + error.message);
-  }
-});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
