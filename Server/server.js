@@ -23,17 +23,26 @@ app.use(helmet({
 
 // Middleware
 app.use(cors({
-  origin: [
-    'https://seniorly-five.vercel.app', 
-    'https://seniorly-alpha.vercel.app',
-    'https://seniorly-backend.onrender.com',
-    'https://seniorly.space',
-    'https://www.seniorly.space',
-    'http://seniorly.space',
-    'http://localhost:3000',
-    'http://localhost:5000'
-  ],
-  credentials: true, 
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://seniorly-five.vercel.app',
+      'https://seniorly-alpha.vercel.app',
+      'https://seniorly-backend.onrender.com',
+      'http://localhost:3000',
+      'http://localhost:5000'
+    ];
+    
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.includes('seniorly.space')) {
+      callback(null, true);
+    } else {
+      console.log('CORS Blocked Origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
