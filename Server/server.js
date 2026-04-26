@@ -15,15 +15,17 @@ const enrollmentRoutes = require('./routes/enrollmentRoutes');
 // Initialize Express app
 const app = express();
 
-// Global Request Logger (For Debugging)
-app.use((req, res, next) => {
-  console.log(`Incoming Request: ${req.method} ${req.url} from ${req.headers.origin || 'No Origin'}`);
-  next();
-});
+// CORS Configuration
+const allowedOriginRegex = /https?:\/\/(.*\.?seniorly\.space|seniorly-.*\.vercel\.app|seniorly-backend\.onrender\.com|localhost|127\.0\.0\.1)(:\d+)?$/;
 
-// CORS Configuration - Permissive for Debugging
 const corsOptions = {
-  origin: true, 
+  origin: (origin, callback) => {
+    if (!origin || allowedOriginRegex.test(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
