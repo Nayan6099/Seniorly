@@ -195,6 +195,21 @@ const Mentorship: React.FC = () => {
         .book-session-btn:hover {
           background: var(--accent-secondary);
         }
+        @media (max-width: 768px) {
+          .mentorship-section {
+            padding: 40px 0;
+          }
+          .section-title {
+            font-size: 2rem;
+          }
+          .mentors-grid {
+            grid-template-columns: 1fr;
+            padding: 0 20px;
+          }
+          .mentor-card {
+            padding: 20px;
+          }
+        }
       `}</style>
     </section>
   );

@@ -681,17 +681,135 @@ body {
 /* Mobile Navigation */
 .navbar-toggle {
   display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
 }
 
 .navbar-menu {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  transition: all 0.3s ease;
 }
 
 /* Responsive Design */
-@media (max-width: 900px) {
-  .courses-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 991px) {
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: 60px; /* Adjust based on header height */
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: var(--nav-bg);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+    z-index: 999;
+    overflow-y: auto;
+  }
+
+  .navbar-menu.open {
+    left: 0;
+  }
+
+  .custom-navbar-links {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .custom-search-form {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .custom-search-input {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .custom-auth-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .custom-login-btn,
+  .custom-signup-btn {
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    margin-left: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    padding: 0 15px;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+
+  .banner-slideshow {
+    height: 300px;
+  }
+
+  .slide {
+    height: 300px;
+  }
+
+  .banner-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .upcoming-info-banner {
+    flex-direction: column;
+    text-align: center;
+    margin: 0 15px 2rem;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  .newsletter-input {
+    width: 100%;
+  }
+
+  .newsletter-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .logo-img {
+    width: 120px;
+  }
+
+  .course-card {
+    margin-bottom: 1rem;
+  }
+}

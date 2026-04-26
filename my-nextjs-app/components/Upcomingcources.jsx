@@ -330,6 +330,27 @@ const UpcomingCourses = () => {
         .modal-info p {
           color: var(--text-secondary);
         }
+        @media (max-width: 768px) {
+          .upcoming-courses-container {
+            padding: 40px 0;
+          }
+          .newsletter-signup {
+            padding: 2rem 1rem;
+            margin: 2rem 15px 0;
+          }
+          .newsletter-content h3 {
+            font-size: 1.25rem;
+          }
+          .modal-content {
+            max-width: 95%;
+          }
+          .modal-info {
+            padding: 15px;
+          }
+          .modal-info h3 {
+            font-size: 1.1rem;
+          }
+        }
       `}</style>
     </div>
   );

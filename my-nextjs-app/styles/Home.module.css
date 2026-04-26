@@ -216,13 +216,71 @@
   font-weight: 600;
 }
 
+@media (max-width: 991px) {
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
-  .communityContent {
-    flex-direction: column;
-    text-align: center;
+  .hero {
+    padding: 40px 20px;
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .statCard h3 {
+    font-size: 2.25rem;
+  }
+
+  .communityContent {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .communityIcon {
+    margin-bottom: 1rem;
+  }
+
+  .whatsappBtn {
+    width: 100%;
+    text-align: center;
   }
 }
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.85rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
