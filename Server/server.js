@@ -15,17 +15,10 @@ const enrollmentRoutes = require('./routes/enrollmentRoutes');
 // Initialize Express app
 const app = express();
 
-// Security middleware
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" },
-  contentSecurityPolicy: false,
-}));
-
-// Middleware
 // CORS Configuration
 const allowedOriginRegex = /https?:\/\/(.*\.?seniorly\.space|seniorly-.*\.vercel\.app|seniorly-backend\.onrender\.com|localhost|127\.0\.0\.1)(:\d+)?$/;
 
-app.use(cors({
+const corsOptions = {
   origin: (origin, callback) => {
     if (!origin || allowedOriginRegex.test(origin)) {
       callback(null, true);
@@ -38,10 +31,17 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   exposedHeaders: ['Set-Cookie']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
+// Security middleware
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  contentSecurityPolicy: false,
 }));
 
-// Explicitly handle OPTIONS preflight requests
-app.options('*', cors());
 app.use(morgan('combined'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
