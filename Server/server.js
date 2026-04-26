@@ -15,6 +15,9 @@ const enrollmentRoutes = require('./routes/enrollmentRoutes');
 // Initialize Express app
 const app = express();
 
+// Trust Render proxy
+app.set('trust proxy', 1);
+
 // CORS Configuration
 const allowedOriginRegex = /https?:\/\/(.*\.?seniorly\.space|seniorly-.*\.vercel\.app|seniorly-backend\.onrender\.com|localhost|127\.0\.0\.1)(:\d+)?$/;
 
