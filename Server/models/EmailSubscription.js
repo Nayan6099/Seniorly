@@ -242,7 +242,6 @@ emailSubscriptionSchema.methods.trackLinkClicked = function() {
 };
 
 // Indexes for better performance
-emailSubscriptionSchema.index({ email: 1 });
 emailSubscriptionSchema.index({ status: 1 });
 emailSubscriptionSchema.index({ subscriptionType: 1 });
 emailSubscriptionSchema.index({ interests: 1 });

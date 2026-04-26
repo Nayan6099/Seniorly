@@ -104,7 +104,13 @@ connectDB().then(() => {
   const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Seniorly Backend is LIVE on port ${PORT}`);
     console.log(`Connected to Database Successfully`);
+  }).on('error', (err) => {
+    console.error('CRITICAL: Server failed to start:', err);
+    process.exit(1);
   });
+}).catch(err => {
+  console.error('CRITICAL: Initial connection/setup failed:', err);
+  process.exit(1);
 });
 
 // Graceful shutdown
