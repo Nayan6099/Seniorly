@@ -38,7 +38,7 @@ const emailTemplates = {
           <p>Thank you for subscribing to our ${data.subscriptionType} updates!</p>
           <p>Please click the button below to confirm your email address:</p>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.API_URL || 'http://localhost:5000'}/api/emails/confirm/${data.token}" 
+            <a href="${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/confirm/${data.token}" 
                style="background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
               Confirm Email
             </a>
@@ -55,7 +55,7 @@ const emailTemplates = {
       
       Thank you for subscribing to our ${data.subscriptionType} updates!
       
-      Please confirm your email by visiting: ${process.env.API_URL || 'http://localhost:5000'}/api/emails/confirm/${data.token}
+      Please confirm your email by visiting: ${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/confirm/${data.token}
       
       If you didn't subscribe to our emails, you can safely ignore this message.
       
@@ -82,7 +82,7 @@ const emailTemplates = {
             <li>🔥 Exclusive offers and discounts</li>
           </ul>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.CLIENT_URL}/courses" 
+            <a href="${process.env.CLIENT_URL || 'https://www.seniorly.space'}/courses" 
                style="background: #10b981; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
               Browse Courses
             </a>
@@ -91,7 +91,7 @@ const emailTemplates = {
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
           <p>&copy; 2025 Seniorly. All rights reserved.</p>
-          <p><a href="${process.env.CLIENT_URL}/unsubscribe?email=${data.email}" style="color: #a0aec0;">Unsubscribe</a></p>
+          <p><a href="${process.env.CLIENT_URL || 'https://www.seniorly.space'}/unsubscribe?email=${data.email}" style="color: #a0aec0;">Unsubscribe</a></p>
         </div>
       </div>
     `,
@@ -106,7 +106,7 @@ const emailTemplates = {
       - Industry insights from experts
       - Exclusive offers and discounts
       
-      Browse our courses: ${process.env.CLIENT_URL}/courses
+      Browse our courses: ${process.env.CLIENT_URL || 'https://www.seniorly.space'}/courses
       
       Happy learning!
       Seniorly Team
@@ -306,7 +306,7 @@ const emailTemplates = {
           ` : ''}
           
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.CLIENT_URL}/courses" 
+            <a href="${process.env.CLIENT_URL || 'https://www.seniorly.space'}/courses" 
                style="background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
               Explore Courses
             </a>
@@ -314,7 +314,7 @@ const emailTemplates = {
           
           <p style="font-size: 14px; color: #64748b;">
             Don't want to receive our newsletter? 
-            <a href="${process.env.CLIENT_URL}/unsubscribe?email=${data.email}">Unsubscribe here</a>
+            <a href="${process.env.CLIENT_URL || 'https://www.seniorly.space'}/unsubscribe?email=${data.email}">Unsubscribe here</a>
           </p>
         </div>
         <div style="background: #1a202c; color: #a0aec0; padding: 20px; text-align: center; font-size: 14px;">
@@ -335,9 +335,9 @@ const emailTemplates = {
       
       ${data.tips ? `Learning Tip: ${data.tips}` : ''}
       
-      Explore Courses: ${process.env.CLIENT_URL}/courses
+      Explore Courses: ${process.env.CLIENT_URL || 'https://www.seniorly.space'}/courses
       
-      Don't want to receive our newsletter? Unsubscribe: ${process.env.CLIENT_URL}/unsubscribe?email=${data.email}
+      Don't want to receive our newsletter? Unsubscribe: ${process.env.CLIENT_URL || 'https://www.seniorly.space'}/unsubscribe?email=${data.email}
       
       Best regards,
       Seniorly Team
@@ -351,7 +351,7 @@ const sendConfirmationEmail = async (email, token, data) => {
   const template = emailTemplates.confirmation({ ...data, token });
   
   const trackingId = Buffer.from(`${email}|confirmation`).toString('base64');
-  const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
+  const trackingPixel = `<img src="${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
     from: `"Seniorly" <${process.env.EMAIL_USER}>`,
@@ -367,7 +367,7 @@ const sendWelcomeEmail = async (email, data) => {
   const template = emailTemplates.welcome({ ...data, email });
   
   const trackingId = Buffer.from(`${email}|welcome`).toString('base64');
-  const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
+  const trackingPixel = `<img src="${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
     from: `"Seniorly" <${process.env.EMAIL_USER}>`,
@@ -383,7 +383,7 @@ const sendEnrollmentConfirmation = async (email, data) => {
   const template = emailTemplates.enrollmentConfirmation(data);
   
   const trackingId = Buffer.from(`${email}|enrollment`).toString('base64');
-  const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
+  const trackingPixel = `<img src="${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
     from: `"Seniorly" <${process.env.EMAIL_USER}>`,
@@ -396,11 +396,11 @@ const sendEnrollmentConfirmation = async (email, data) => {
 
 const sendCourseNotification = async (email, data) => {
   const transporter = createTransporter();
-  const unsubscribeUrl = `${process.env.API_URL}/api/emails/unsubscribe?email=${email}`;
+  const unsubscribeUrl = `${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/unsubscribe?email=${email}`;
   const template = emailTemplates.courseNotification({ ...data, unsubscribeUrl });
   
   const trackingId = Buffer.from(`${email}|course_notification`).toString('base64');
-  const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
+  const trackingPixel = `<img src="${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
     from: `"Seniorly" <${process.env.EMAIL_USER}>`,
@@ -416,7 +416,7 @@ const sendCertificate = async (email, data) => {
   const template = emailTemplates.certificate(data);
   
   const trackingId = Buffer.from(`${email}|certificate`).toString('base64');
-  const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
+  const trackingPixel = `<img src="${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
     from: `"Seniorly" <${process.env.EMAIL_USER}>`,
@@ -432,7 +432,7 @@ const sendNewsletter = async (email, data) => {
   const template = emailTemplates.newsletter({ ...data, email });
   
   const trackingId = Buffer.from(`${email}|newsletter`).toString('base64');
-  const trackingPixel = `<img src="${process.env.API_URL}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
+  const trackingPixel = `<img src="${process.env.API_URL || 'https://seniorly-backend.onrender.com'}/api/emails/track/open/${trackingId}" width="1" height="1" style="display:none;">`;
   
   await transporter.sendMail({
     from: `"Seniorly" <${process.env.EMAIL_USER}>`,
