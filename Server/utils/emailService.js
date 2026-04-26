@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 // Create email transporter
 const createTransporter = () => {
-  return nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     secure: false, // true for 465, false for other ports
@@ -11,6 +11,17 @@ const createTransporter = () => {
       pass: process.env.EMAIL_PASS,
     },
   });
+
+  // Verify connection configuration
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.error('SMTP Connection Error:', error);
+    } else {
+      console.log('SMTP Server is ready to take our messages');
+    }
+  });
+
+  return transporter;
 };
 
 // Email templates
